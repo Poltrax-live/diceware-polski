@@ -9,7 +9,7 @@ description = "Polish Diceware word lists (7776 words) and a secure passphrase g
 readme = "README.md"
 requires-python = ">=3.9"
 license = { text = "MIT AND CC-BY-SA-4.0" }
-authors = [{ name = "Poltrax" }]
+authors = [{ name = "Poltrax" }, { name = "Michał Piórkowski" }, { name = "Claude.ai" }]
 keywords = ["diceware", "passphrase", "password", "polish", "wordlist"]
 classifiers = [
   "Programming Language :: Python :: 3",

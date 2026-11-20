@@ -260,3 +260,5 @@ The word lists are licensed under CC BY-SA 4.0, while the scripts are available 
 Please do not generate important passwords on websites or ask an AI chatbot to create them.
 
 Zrobiliśmy to w [Poltrax](https://poltrax.live), gdzie na co dzień śledzimy GPS-em zawodników na trasach biegów i rajdów rowerowych - tym razem kropki zamieniliśmy na słowa.
+
+Autorzy: Michał Piórkowski i [Claude.ai](https://claude.ai).

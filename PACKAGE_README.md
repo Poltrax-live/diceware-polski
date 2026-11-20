@@ -40,4 +40,4 @@ lookup("43136");
 Generator w przeglądarce, instrukcja z kostką i lista do druku: https://poltrax-live.github.io/diceware-polski/
 Źródło, sposób budowy listy i zgłoszenia: https://github.com/Poltrax-live/diceware-polski
 
-Listy: CC BY-SA 4.0 (SJP.pl, FrequencyWords/OpenSubtitles). Kod: MIT. Zrobione w [Poltrax](https://poltrax.live).
+Listy: CC BY-SA 4.0 (SJP.pl, FrequencyWords/OpenSubtitles). Kod: MIT. Zrobione w [Poltrax](https://poltrax.live) przez Michała Piórkowskiego i [Claude.ai](https://claude.ai).

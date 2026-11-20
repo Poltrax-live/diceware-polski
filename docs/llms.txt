@@ -1,6 +1,6 @@
 # Polski Diceware (diceware-polski)
 
-> The first full Polish Diceware word list: 7776 ordinary, memorable Polish words for generating strong passphrases (7 words ≈ 90 bits). Two variants: without Polish diacritics (recommended, types on any keyboard) and with diacritics. Free, open source, made by Poltrax.
+> The first full Polish Diceware word list: 7776 ordinary, memorable Polish words for generating strong passphrases (7 words ≈ 90 bits). Two variants: without Polish diacritics (recommended, types on any keyboard) and with diacritics. Free, open source, made by Poltrax (Michał Piórkowski with Claude.ai).
 
 Polish summary: Pierwsza pełna polska lista Diceware - 7776 normalnych słów do mocnych haseł, które da się zapamiętać. Hasło losuje się kostką (5 rzutów = 1 słowo) albo generatorem. 7 słów to ok. 90 bitów.
 

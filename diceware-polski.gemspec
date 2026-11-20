@@ -5,7 +5,7 @@ require_relative "lib/diceware_polski/version"
 Gem::Specification.new do |spec|
   spec.name = "diceware-polski"
   spec.version = DicewarePolski::VERSION
-  spec.authors = ["Poltrax"]
+  spec.authors = ["Poltrax", "Michał Piórkowski", "Claude.ai"]
   spec.summary = "Polish Diceware word lists (7776 words) and a secure passphrase generator"
   spec.description = "Two full Polish Diceware lists (with and without Polish diacritics) " \
                      "and a tiny SecureRandom-based passphrase generator with a CLI."
