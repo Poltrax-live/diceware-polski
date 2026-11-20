@@ -28,7 +28,7 @@ Do całej reszty (sklepy, fora, aplikacje) niech hasła losuje menedżer haseł 
 
 ## W 30 sekund
 
-1. Otwórz [generator w przeglądarce](https://poltrax-live.github.io/diceware-polski/) albo rzuć kostką ([instrukcja](#kostką)), albo uruchom skrypt: [Windows](#windows), [macOS](#macos), [Linux](#linux), [Ruby](#ruby).
+1. Otwórz [generator w przeglądarce](https://poltrax-live.github.io/diceware-polski/) albo rzuć kostką ([instrukcja](#kostką)), albo uruchom skrypt: [Windows](#windows), [macOS](#macos), [Linux](#linux), [Python/JS/Ruby](#dla-programistów-python-javascript-ruby).
 2. Weź 7 słów - nie wybieraj ich sam, niech wylosuje kostka albo komputer.
 3. Zapisz wylosowane hasło w menedżerze haseł, np. Bitwarden, KeePassXC lub 1Password.
 
@@ -134,22 +134,32 @@ cd diceware-polski
 
 `haslo.sh` używa `shuf` z `/dev/urandom`. Wolisz Pythona? `python3 haslo.py` działa tak samo jak na Macu.
 
-### Ruby
+### Dla programistów: Python, JavaScript, Ruby
 
 ```bash
-gem install diceware-polski
-diceware-polski             # 7 słów
-diceware-polski 8 --ogonki  # 8 słów, lista z polskimi znakami
+pip install diceware-polski      # Python 3.9+
+npm install diceware-polski      # Node.js 19+ i przeglądarki
+gem install diceware-polski      # Ruby 2.7+
+```
+
+```python
+import diceware_polski
+diceware_polski.generate()                                        # 7 słów
+diceware_polski.generate(words=8, diacritics=True, separator="-")
+diceware_polski.lookup("43136")                                   # słowo dla rzutu kostką
+```
+
+```js
+import { generate, lookup } from "diceware-polski";
+generate({ words: 8, diacritics: true, separator: "-" });
 ```
 
 ```ruby
 require "diceware_polski"
-
-DicewarePolski.generate                                     # => "lustro okoń ..." (7 słów)
 DicewarePolski.generate(words: 8, diacritics: true, separator: "-")
-DicewarePolski.lookup("43136")                              # słowo dla rzutu kostką
-DicewarePolski.entropy_bits(words: 7)                       # => 90.47...
 ```
+
+Każda paczka ma też komendę `diceware-polski` (np. `diceware-polski 8 --ogonki`).
 
 Generatory korzystają z kryptograficznego generatora liczb losowych systemu, a nie ze zwykłego `random`.
 
@@ -220,7 +230,7 @@ Web generator: https://poltrax-live.github.io/diceware-polski/ (runs locally in 
 `diceware-polski` provides two complete Polish Diceware word lists with exactly 7,776 entries each.  
 The recommended list contains only words without Polish characters, while the second list also includes words with Polish diacritics.  
 Seven randomly selected words provide about 90 bits of entropy and are recommended for important passwords.  
-Passwords can be generated with physical dice or the included scripts for Windows, macOS, Linux and Ruby.  
+Passwords can be generated with physical dice or the included scripts for Windows, macOS, Linux, and as packages for Python (`pip install diceware-polski`), JavaScript (`npm install diceware-polski`) and Ruby (`gem install diceware-polski`).  
 The generators use the operating system's cryptographically secure random number generator.  
 The word lists are licensed under CC BY-SA 4.0, while the scripts are available under the MIT license.  
 Please do not generate important passwords on websites or ask an AI chatbot to create them.

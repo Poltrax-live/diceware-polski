@@ -1,0 +1,49 @@
+{
+  "name": "diceware-polski",
+  "version": "1.0.0",
+  "description": "Polish Diceware word lists (7776 words) and a secure passphrase generator for browsers and Node.js",
+  "type": "module",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    }
+  },
+  "bin": {
+    "diceware-polski": "bin/diceware-polski.js"
+  },
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "lists.js",
+    "bin/",
+    "README.md",
+    "LICENSE",
+    "LICENSE-LISTS"
+  ],
+  "engines": {
+    "node": ">=19"
+  },
+  "sideEffects": false,
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": [
+    "diceware",
+    "passphrase",
+    "password",
+    "polish",
+    "wordlist",
+    "polski"
+  ],
+  "author": "Poltrax",
+  "license": "(MIT AND CC-BY-SA-4.0)",
+  "homepage": "https://poltrax-live.github.io/diceware-polski/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Poltrax-live/diceware-polski.git",
+    "directory": "js"
+  }
+}

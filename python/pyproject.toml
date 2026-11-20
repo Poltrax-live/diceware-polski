@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "diceware-polski"
+version = "1.0.0"
+description = "Polish Diceware word lists (7776 words) and a secure passphrase generator"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT AND CC-BY-SA-4.0" }
+authors = [{ name = "Poltrax" }]
+keywords = ["diceware", "passphrase", "password", "polish", "wordlist"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Natural Language :: Polish",
+  "Topic :: Security",
+]
+
+[project.urls]
+Homepage = "https://poltrax-live.github.io/diceware-polski/"
+Source = "https://github.com/Poltrax-live/diceware-polski"
+
+[project.scripts]
+diceware-polski = "diceware_polski.__main__:main"
+
+[tool.setuptools.package-data]
+diceware_polski = ["lists/*.txt"]

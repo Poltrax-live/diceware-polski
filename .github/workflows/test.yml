@@ -1,0 +1,27 @@
+name: test
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with: { ruby-version: "3.3" }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - uses: actions/setup-node@v4
+        with: { node-version: "22" }
+      - name: Packages and web page are in sync with lists/
+        run: |
+          python3 scripts/sync_packages.py
+          python3 scripts/build_web.py
+          git diff --exit-code
+      - run: ruby -Ilib test/diceware_polski_test.rb
+      - run: cd python && PYTHONPATH=src python3 -m unittest discover -s tests
+      - run: cd js && npm test
+      - run: ./haslo.sh 7 && python3 haslo.py 7
+      - name: PowerShell generator
+        shell: pwsh
+        run: ./haslo.ps1 -Slowa 7; ./haslo.ps1 -Slowa 8 -Ogonki -Separator "-"
