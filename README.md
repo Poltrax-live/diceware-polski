@@ -1,5 +1,7 @@
 # diceware-polski
 
+<p align="center"><img src="docs/img/og.jpg" width="600" alt="Mikołaj Rej: A niechaj narodowie wżdy postronni znają, iż Polacy nie gęsi, iż swój DICEWARE mają"></p>
+
 Pełna polska lista 7776 słów do tworzenia mocnych i łatwych do zapamiętania haseł metodą Diceware.
 
 ```text
@@ -234,6 +236,8 @@ Każda zmiana słowa zmienia również numerację całej listy, dlatego kolejne 
 - Kod i skrypty: [MIT](LICENSE).
 
 Dzięki dla:
+
+- Mikołaja Reja za inspirację (portret: litografia ok. 1850, [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Miko%C5%82aj_Rey_z_Nag%C5%82owic.jpg), domena publiczna; oryginał cytatu: „…iż swój język mają”, *Do tego co czytał*, 1562),
 
 - [SJP.pl](https://sjp.pl) za otwarty słownik,
 - [Hermita Dave'a i projektu FrequencyWords](https://github.com/hermitdave/FrequencyWords) za dane o częstości słów,

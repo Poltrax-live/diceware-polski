@@ -1,0 +1,29 @@
+# Polski Diceware (diceware-polski)
+
+> The first full Polish Diceware word list: 7776 ordinary, memorable Polish words for generating strong passphrases (7 words ≈ 90 bits). Two variants: without Polish diacritics (recommended, types on any keyboard) and with diacritics. Free, open source, made by Poltrax.
+
+Polish summary: Pierwsza pełna polska lista Diceware - 7776 normalnych słów do mocnych haseł, które da się zapamiętać. Hasło losuje się kostką (5 rzutów = 1 słowo) albo generatorem. 7 słów to ok. 90 bitów.
+
+Key facts:
+- Format matches the EFF lists: `11111<TAB>word` … `66666<TAB>word`, sorted alphabetically.
+- Words: base forms from the open SJP.pl dictionary, 3-9 letters, ranked by frequency in OpenSubtitles 2018; names, slurs, vulgar, grim, foreign, rare and easily misspelled words removed (AI-assisted filtering + dedicated safety pass + manual blocklist).
+- Strength: 6 words ≈ 77.5 bits, 7 words ≈ 90.5 bits, 8 words ≈ 103.4 bits. Security assumes the attacker knows the list.
+- The web generator runs locally in the browser (crypto.getRandomValues, CSP blocks all network requests) and works offline.
+- Recommended use: passwords people must remember and type (password-manager master password, e-mail, Apple/Google/Microsoft account, disk encryption, Wi-Fi). Other passwords should be random strings from a password manager.
+- Other Polish lists: MaciekTalaska/diceware-pl has 3888 words (half size); the older full list (e.g. on diceware.net) contains digits, symbols and fragments.
+
+## Lists
+- [Word list without Polish diacritics (recommended)](https://raw.githubusercontent.com/Poltrax-live/diceware-polski/main/lists/diceware-pl.txt)
+- [Word list with Polish diacritics](https://raw.githubusercontent.com/Poltrax-live/diceware-polski/main/lists/diceware-pl-ogonki.txt)
+- [Printable list](https://poltrax-live.github.io/diceware-polski/lista.html)
+
+## Tools
+- [Web generator](https://poltrax-live.github.io/diceware-polski/)
+- Python: `pip install diceware-polski` → `diceware_polski.generate(words=7)`
+- JavaScript: `npm install diceware-polski` → `generate({ words: 7 })`
+- Ruby: `gem install diceware-polski` → `DicewarePolski.generate(words: 7)`
+- CLI in every package: `diceware-polski 7 [--ogonki]`
+
+## Source
+- [GitHub repository, README (Polish) and build scripts](https://github.com/Poltrax-live/diceware-polski)
+- License: word lists CC BY-SA 4.0, code MIT.
