@@ -30,6 +30,13 @@
   .meta { color:var(--muted); font-size:.92rem; margin-top:12px; }
   ol li, ul li { margin: .3rem 0; }
   .ok { color: var(--accent); font-weight:600; }
+  .table-wrap { overflow-x:auto; }
+  table { border-collapse: collapse; width:100%; margin: .6rem 0 1rem; font-size:.95rem; }
+  th, td { text-align:left; padding:8px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color: var(--muted); font-weight:600; }
+  td.good { color: var(--accent); font-weight:600; }
+  td.bad { color: #c0392b; font-weight:600; }
+  @media (prefers-color-scheme: dark) { td.bad { color:#ff7b6b; } }
   footer { color:var(--muted); font-size:.9rem; margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; }
   a { color: var(--accent); }
   code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size:.92em; }
@@ -63,6 +70,24 @@
     </div>
     <p class="meta" id="meta"></p>
   </section>
+
+  <h2>Czemu słowa, a nie „Kotek123^&amp;*”?</h2>
+  <p>Załóżmy najgorsze: ktoś wykradł bazę haseł z serwisu i ma potężny sprzęt - <strong>bilion prób na sekundę</strong>.</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>Hasło</th><th>Czas złamania</th><th>Zapamiętasz?</th></tr></thead>
+    <tbody>
+      <tr><td><code>Kotek123^&amp;*</code></td><td class="bad">ułamek sekundy</td><td>tak</td></tr>
+      <tr><td><code>SAsfbGFD$%dfG</code> - „wymyślone” palcami</td><td class="bad">dużo krócej, niż wygląda</td><td>nie</td></tr>
+      <tr><td>13 naprawdę losowych znaków</td><td>ok. 700 tys. lat</td><td>nie</td></tr>
+      <tr><td>6 losowych słów</td><td>ok. 3,5 tys. lat</td><td>tak</td></tr>
+      <tr><td><strong>7 losowych słów</strong></td><td class="good">ok. 27 mln lat</td><td class="good">tak</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p><code>Kotek123^&amp;*</code> spełnia wszystkie wymogi „silnego hasła”: wielka litera, cyfry, znaki specjalne, 11 znaków. Tyle że to słowo + <code>123</code> + te same klawisze z Shiftem - pierwszy schemat, który sprawdzają programy do łamania haseł.</p>
+  <p><code>SAsfbGFD$%dfG</code> wygląda losowo, ale człowiek nie umie losować - palce chodzą po sąsiednich klawiszach (<code>asdf</code>, <code>gfd</code>, <code>$%</code>), a to też są znane wzorce. I nikt tego nie zapamięta.</p>
+  <p>Siedem słów z kostki jest i mocniejsze, i do zapamiętania. <span class="meta">(Szacunki: połowa wszystkich kombinacji przy 10¹² prób/s. Jeśli serwis dobrze zabezpiecza hasła, wszystkie czasy rosną tysiące razy - ale „Kotek” i tak pada w kilka tygodni.)</span></p>
 
   <h2>Do czego takie hasło?</h2>
   <p>Do haseł, które musisz <strong>pamiętać i wpisywać palcami</strong>:</p>

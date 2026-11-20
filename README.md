@@ -67,6 +67,26 @@ Słowa są ułożone alfabetycznie. Na liście z polskimi znakami nie ma par, kt
 
 Komputer kwantowy korzystający z algorytmu Grovera w praktyce „obcina” siłę takiego hasła o połowę. Przy 7 słowach nadal zostaje duży zapas.
 
+## Czemu słowa, a nie „Kotek123^&*”?
+
+Załóżmy najgorsze: ktoś wykradł bazę haseł z serwisu i ma potężny sprzęt - bilion prób na sekundę.
+
+| Hasło | Czas złamania | Zapamiętasz? |
+|---|---|---|
+| `Kotek123^&*` | **ułamek sekundy** | tak |
+| `SAsfbGFD$%dfG` - „wymyślone” palcami | dużo krócej, niż wygląda | nie |
+| 13 naprawdę losowych znaków | ok. 700 tys. lat | nie |
+| 6 losowych słów | ok. 3,5 tys. lat | tak |
+| **7 losowych słów** | **ok. 27 mln lat** | **tak** |
+
+`Kotek123^&*` spełnia wszystkie wymogi „silnego hasła”: wielka litera, cyfry, znaki specjalne, 11 znaków. Tyle że to słowo + `123` + te same klawisze z Shiftem - pierwszy schemat, który sprawdzają programy do łamania haseł.
+
+`SAsfbGFD$%dfG` wygląda losowo, ale człowiek nie umie losować - palce chodzą po sąsiednich klawiszach (`asdf`, `gfd`, `$%`), a to też są znane wzorce. I nikt tego nie zapamięta.
+
+Siedem słów z kostki jest i mocniejsze, i do zapamiętania.
+
+<sub>Szacunki: połowa wszystkich kombinacji przy 10¹² prób/s. Jeśli serwis dobrze zabezpiecza hasła (np. bcrypt, Argon2), wszystkie czasy rosną tysiące razy - ale „Kotek” i tak pada w kilka tygodni.</sub>
+
 ## Jak wylosować hasło?
 
 ### Kostką
