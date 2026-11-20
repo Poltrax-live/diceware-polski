@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "optparse"
+require_relative "../lib/diceware_polski"
+
+options = { words: DicewarePolski::DEFAULT_WORDS, diacritics: false, separator: " " }
+OptionParser.new do |opts|
+  opts.banner = "Użycie: diceware-polski [LICZBA_SŁÓW] [opcje]"
+  opts.on("-o", "--ogonki", "Lista z polskimi znakami") { options[:diacritics] = true }
+  opts.on("-s", "--separator ZNAK", "Znak między słowami (domyślnie spacja)") { |s| options[:separator] = s }
+  opts.on("-v", "--version", "Wersja") { puts DicewarePolski::VERSION; exit }
+end.parse!
+
+options[:words] = Integer(ARGV.first) if ARGV.first
+puts DicewarePolski.generate(**options)
+warn format("(siła: ok. %d bitów)", DicewarePolski.entropy_bits(words: options[:words]))

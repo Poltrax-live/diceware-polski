@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Polski Diceware - generator haseł ze słów</title>
+<meta name="description" content="Wylosuj mocne hasło z polskich słów. Losowanie odbywa się w Twojej przeglądarce, nic nie jest nigdzie wysyłane.">
+<style>
+  :root { --bg:#fafaf7; --fg:#1d1d1b; --muted:#5d5d58; --card:#fff; --line:#deded8; --accent:#0b6e4f; --accent-fg:#fff; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#151514; --fg:#ececea; --muted:#a9a9a3; --card:#1f1f1d; --line:#353532; --accent:#3fb68b; --accent-fg:#0d1a14; }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:17px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 32px 20px 64px; }
+  h1 { font-size: 1.9rem; line-height:1.2; margin: 0 0 .4rem; }
+  h2 { font-size: 1.2rem; margin: 2.2rem 0 .6rem; }
+  p.lead { color: var(--muted); margin-top: 0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:22px; margin-top:22px; }
+  #phrase { font: 600 1.55rem/1.45 ui-monospace, "SF Mono", Menlo, Consolas, monospace; word-break: break-word; min-height: 2.3em; margin: 4px 0 14px; }
+  .controls { display:flex; flex-wrap:wrap; gap:14px 22px; align-items:center; margin-bottom: 18px; }
+  label { display:flex; gap:8px; align-items:center; }
+  select { font:inherit; padding:4px 8px; border-radius:8px; border:1px solid var(--line); background:var(--card); color:var(--fg); }
+  .buttons { display:flex; flex-wrap:wrap; gap:10px; }
+  button { font:inherit; font-weight:600; padding:10px 18px; border-radius:10px; border:1px solid var(--accent); cursor:pointer; background:transparent; color:var(--accent); }
+  button.primary { background:var(--accent); color:var(--accent-fg); }
+  button:focus-visible, select:focus-visible, input:focus-visible { outline:3px solid var(--accent); outline-offset:2px; }
+  .meta { color:var(--muted); font-size:.92rem; margin-top:12px; }
+  ol li, ul li { margin: .3rem 0; }
+  .ok { color: var(--accent); font-weight:600; }
+  footer { color:var(--muted); font-size:.9rem; margin-top:3rem; border-top:1px solid var(--line); padding-top:1rem; }
+  a { color: var(--accent); }
+  code { font-family: ui-monospace, Menlo, Consolas, monospace; font-size:.92em; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Wylosuj hasło z polskich słów</h1>
+  <p class="lead"><strong>Pierwsza pełna polska lista Diceware</strong> - 7776 normalnych słów, za darmo i <a href="https://github.com/Poltrax-live/diceware-polski">open source</a>.</p>
+  <p class="lead">Kilka losowych słów to hasło, które łatwo zapamiętać, a bardzo trudno złamać. Losowanie odbywa się <strong>w Twojej przeglądarce</strong> - ta strona niczego nie wysyła i działa nawet bez internetu.</p>
+
+  <section class="card" aria-labelledby="gen-h">
+    <h2 id="gen-h" style="margin-top:0">Twoje hasło</h2>
+    <div id="phrase" aria-live="polite">-</div>
+    <div class="controls">
+      <label>Liczba słów
+        <select id="words">
+          <option>5</option><option>6</option><option selected>7</option><option>8</option><option>9</option><option>10</option>
+        </select>
+      </label>
+      <label>Między słowami
+        <select id="sep">
+          <option value=" " selected>spacja</option><option value="-">myślnik -</option><option value=".">kropka .</option><option value="">nic</option>
+        </select>
+      </label>
+      <label><input type="checkbox" id="ogonki"> polskie znaki (ą, ę, ł…)</label>
+    </div>
+    <div class="buttons">
+      <button class="primary" id="roll">Losuj</button>
+      <button id="copy">Kopiuj</button>
+    </div>
+    <p class="meta" id="meta"></p>
+  </section>
+
+  <h2>Do czego takie hasło?</h2>
+  <p>Do haseł, które musisz <strong>pamiętać i wpisywać palcami</strong>:</p>
+  <ul>
+    <li>hasło główne do menedżera haseł (Bitwarden, 1Password, KeePassXC…),</li>
+    <li>poczta - bo przez nią da się przejąć wszystkie inne konta,</li>
+    <li>konto Apple, Google albo Microsoft,</li>
+    <li>logowanie do komputera i szyfrowanie dysku,</li>
+    <li>domowe Wi-Fi (łatwo je podyktować gościom: „lustro okoń pościel…”).</li>
+  </ul>
+  <p>Do całej reszty (sklepy, fora, aplikacje) niech hasła losuje menedżer haseł - ich nie musisz pamiętać.</p>
+
+  <h2>Jak tego użyć - krok po kroku</h2>
+  <ol>
+    <li>Kliknij <strong>Losuj</strong>. Wypadnie kilka słów, np. <em>„lustro okoń pościel…”</em>.</li>
+    <li>Wymyśl sobie z nich zabawną scenkę - np. okoń przegląda się w lustrze, leżąc w pościeli. Tak zapamiętasz kolejność.</li>
+    <li>Wpisz te słowa jako nowe hasło (razem ze spacjami, jeśli serwis na nie pozwala - jeśli nie, wybierz myślnik).</li>
+    <li>Zapisz hasło w menedżerze haseł (np. Bitwarden, KeePassXC, 1Password) albo na kartce w bezpiecznym miejscu w domu.</li>
+    <li>Gdy serwis wymaga cyfry albo wielkiej litery - po prostu ją dopisz, np. <code>Lustro okoń pościel… 7</code>.</li>
+  </ol>
+
+  <h2 id="kostka">Bez komputera: kostką</h2>
+  <p>Nie ufasz żadnej stronie ani programowi? Zdrowe podejście. Potrzebujesz zwykłej kostki do gry i <a href="lista.html">wydrukowanej listy</a>.</p>
+  <ol>
+    <li>Rzuć kostką 5 razy (albo pięcioma kostkami naraz i czytaj od lewej do prawej). Zapisz wyniki, np. <code>4 3 1 3 6</code>.</li>
+    <li>Na liście znajdź numer <code>43136</code> - obok jest Twoje pierwsze słowo.</li>
+    <li>Powtórz dla każdego słowa. 7 słów = 35 rzutów, ok. 5 minut.</li>
+    <li>Kartkę z rzutami zniszcz, gdy zapamiętasz hasło (albo przepiszesz je do menedżera).</li>
+  </ol>
+  <p>Lista jest posortowana i ponumerowana jak książka telefoniczna - numery idą po kolei od <code>11111</code> do <code>66666</code>, więc słowo znajdziesz w kilka sekund.</p>
+
+  <h2>Kilka zasad</h2>
+  <ul>
+    <li><strong>Nie poprawiaj słów</strong> i nie losuj w kółko, aż wypadnie „ładne” - siła hasła bierze się z losowości.</li>
+    <li><strong>7 słów</strong> do ważnych rzeczy (hasło do menedżera haseł, poczty, szyfrowania dysku). 6 to minimum.</li>
+    <li><strong>Jedno hasło = jedno miejsce.</strong> Do każdego serwisu inne.</li>
+    <li>Bez polskich znaków hasło wpiszesz wszędzie, także na obcej klawiaturze.</li>
+  </ul>
+
+  <h2>Czy to bezpieczne?</h2>
+  <p>Tak, na tyle, na ile może być strona: losuje kryptograficzny generator Twojej przeglądarki (<code>crypto.getRandomValues</code>), strona nie łączy się z żadnym serwerem (blokuje to jej własna polityka bezpieczeństwa), nie ma reklam ani liczników odwiedzin. Cały kod jest jawny na <a href="https://github.com/Poltrax-live/diceware-polski">GitHubie</a>.</p>
+  <p>Chcesz mieć 100% pewności? Zapisz tę stronę (Ctrl+S / Cmd+S), wyłącz internet i otwórz plik - działa tak samo. Albo <a href="#kostka">rzuć kostką</a>.</p>
+
+  <footer>
+    Lista: <a href="https://github.com/Poltrax-live/diceware-polski">diceware-polski</a> (CC BY-SA 4.0), słowa ze słownika <a href="https://sjp.pl">SJP.pl</a>. Metoda <a href="https://world.std.com/~reinhold/diceware.html">Diceware</a> Arnolda Reinholda.
+    Zrobione w <a href="https://poltrax.live">Poltrax</a>.
+  </footer>
+</main>
+<script>
+"use strict";
+const LISTS = /*LISTS*/null;
+const $ = (id) => document.getElementById(id);
+
+function randomIndex(n) {
+  // Rejection sampling so every word has exactly the same chance.
+  const limit = Math.floor(0x100000000 / n) * n;
+  const buf = new Uint32Array(1);
+  do { crypto.getRandomValues(buf); } while (buf[0] >= limit);
+  return buf[0] % n;
+}
+
+function roll() {
+  const list = LISTS[$("ogonki").checked ? "ogonki" : "plain"];
+  const n = Number($("words").value);
+  const words = Array.from({ length: n }, () => list[randomIndex(list.length)]);
+  $("phrase").textContent = words.join($("sep").value);
+  const bits = Math.round(n * Math.log2(list.length));
+  $("meta").textContent = `Siła: ok. ${bits} bitów (${n} słów z listy ${list.length}).` +
+    (n < 6 ? " To mało - do ważnych haseł weź co najmniej 6, najlepiej 7." : "");
+}
+
+$("roll").addEventListener("click", roll);
+["words", "sep", "ogonki"].forEach((id) => $(id).addEventListener("change", roll));
+$("copy").addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText($("phrase").textContent);
+    $("copy").textContent = "Skopiowane ✓";
+  } catch (e) {
+    $("copy").textContent = "Zaznacz i skopiuj ręcznie";
+  }
+  setTimeout(() => { $("copy").textContent = "Kopiuj"; }, 2000);
+});
+roll();
+</script>
+</body>
+</html>
