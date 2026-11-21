@@ -80,6 +80,7 @@
         </select>
       </label>
       <label><input type="checkbox" id="ogonki"> polskie znaki (ą, ę, ł…)</label>
+      <label><input type="checkbox" id="extras"> wielka litera, cyfra i znak specjalny (gdy strona ich wymaga)</label>
     </div>
     <div class="buttons">
       <button class="primary" id="roll">Losuj</button>
@@ -123,7 +124,7 @@
     <li>Wymyśl sobie z nich zabawną scenkę - np. okoń przegląda się w lustrze, leżąc w pościeli. Tak zapamiętasz kolejność.</li>
     <li>Wpisz te słowa jako nowe hasło (razem ze spacjami, jeśli serwis na nie pozwala - jeśli nie, wybierz myślnik).</li>
     <li>Zapisz hasło w menedżerze haseł (np. Bitwarden, KeePassXC, 1Password) albo na kartce w bezpiecznym miejscu w domu.</li>
-    <li>Gdy serwis wymaga cyfry albo wielkiej litery - po prostu ją dopisz, np. <code>Lustro okoń pościel… 7</code>.</li>
+    <li>Gdy serwis wymaga wielkiej litery, cyfry albo znaku specjalnego - zaznacz <strong>wielka litera, cyfra i znak specjalny</strong>. Pierwsze słowo dostanie wielką literę, a na końcu dojdzie losowa cyfra i znak, np. <code>Lustro okoń pościel… 7#</code>.</li>
   </ol>
 
   <h2 id="kostka">Bez komputera: kostką</h2>
@@ -171,18 +172,30 @@ function randomIndex(n) {
   return buf[0] % n;
 }
 
+// Symbols accepted by practically every "must contain a special character" rule.
+const SYMBOLS = "!@#$%&*?";
+
 function roll() {
   const list = LISTS[$("ogonki").checked ? "ogonki" : "plain"];
   const n = Number($("words").value);
+  const sep = $("sep").value;
   const words = Array.from({ length: n }, () => list[randomIndex(list.length)]);
-  $("phrase").textContent = words.join($("sep").value);
-  const bits = Math.round(n * Math.log2(list.length));
-  $("meta").textContent = `Siła: ok. ${bits} bitów (${n} słów z listy ${list.length}).` +
+  let bits = n * Math.log2(list.length);
+  if ($("extras").checked) {
+    // Capital first letter + random digit + random symbol at the end:
+    // satisfies typical complexity rules, adds ~6.3 bits, stays easy to remember.
+    words[0] = words[0].charAt(0).toUpperCase() + words[0].slice(1);
+    words.push(String(randomIndex(10)) + SYMBOLS[randomIndex(SYMBOLS.length)]);
+    bits += Math.log2(10) + Math.log2(SYMBOLS.length);
+  }
+  $("phrase").textContent = words.join(sep);
+  $("meta").textContent = `Siła: ok. ${Math.round(bits)} bitów (${n} słów z listy ${list.length}` +
+    ($("extras").checked ? " + cyfra i znak" : "") + ")." +
     (n < 6 ? " To mało - do ważnych haseł weź co najmniej 6, najlepiej 7." : "");
 }
 
 $("roll").addEventListener("click", roll);
-["words", "sep", "ogonki"].forEach((id) => $(id).addEventListener("change", roll));
+["words", "sep", "ogonki", "extras"].forEach((id) => $(id).addEventListener("change", roll));
 $("copy").addEventListener("click", async () => {
   try {
     await navigator.clipboard.writeText($("phrase").textContent);
