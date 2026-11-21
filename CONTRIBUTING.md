@@ -7,7 +7,5 @@
 5. `python3 scripts/build_web.py` - odświeża stronę w `docs/`.
 6. Testy: `ruby -Ilib test/diceware_polski_test.rb`, `cd python && PYTHONPATH=src python3 -m unittest discover -s tests`, `cd js && npm test`.
 7. Commit, `git tag -a vX.Y.Z`, push z tagami.
-8. Publikacja (konta z 2FA):
-   - Ruby: `gem build diceware-polski.gemspec && gem push diceware-polski-X.Y.Z.gem`
-   - Python: `cd python && python3 -m build && python3 -m twine upload dist/*`
-   - npm: `cd js && npm publish`
+8. Publikacja dzieje się sama: push tagu `vX.Y.Z` uruchamia `.github/workflows/release.yml`, który wysyła gem, paczkę Pythona i npm przez trusted publishing (bez tokenów). Workflow sprawdza, czy tag zgadza się z `VERSION`.
+   Ręcznie, np. żeby ponowić jeden rejestr: Actions → release → Run workflow (zaznacz, które rejestry).
