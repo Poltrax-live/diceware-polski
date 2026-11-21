@@ -13,7 +13,10 @@ Gem::Specification.new do |spec|
   spec.licenses = ["MIT", "CC-BY-SA-4.0"]
   spec.required_ruby_version = ">= 2.7"
   spec.metadata = {
+    "homepage_uri" => "https://poltrax-live.github.io/diceware-polski/",
     "source_code_uri" => spec.homepage,
+    "bug_tracker_uri" => "#{spec.homepage}/issues",
+    "changelog_uri" => "#{spec.homepage}/releases",
     "rubygems_mfa_required" => "true"
   }
   spec.files = Dir["lib/**/*.rb", "lists/*.txt", "exe/*", "README.md", "LICENSE*"]

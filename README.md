@@ -1,5 +1,7 @@
 # diceware-polski
 
+[![PyPI](https://img.shields.io/pypi/v/diceware-polski?label=PyPI)](https://pypi.org/project/diceware-polski/) [![npm](https://img.shields.io/npm/v/diceware-polski?label=npm)](https://www.npmjs.com/package/diceware-polski) [![Gem](https://img.shields.io/gem/v/diceware-polski?label=gem)](https://rubygems.org/gems/diceware-polski) [![test](https://github.com/Poltrax-live/diceware-polski/actions/workflows/test.yml/badge.svg)](https://github.com/Poltrax-live/diceware-polski/actions/workflows/test.yml)
+
 <p align="center"><img src="docs/img/og.jpg" width="600" alt="Mikołaj Rej: A niechaj narodowie wżdy postronni znają, iż Polacy nie gęsi, iż swój DICEWARE mają"></p>
 
 Pełna polska lista 7776 słów do tworzenia mocnych i łatwych do zapamiętania haseł metodą Diceware.

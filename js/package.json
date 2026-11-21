@@ -1,6 +1,6 @@
 {
   "name": "diceware-polski",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Polish Diceware word lists (7776 words) and a secure passphrase generator for browsers and Node.js",
   "type": "module",
   "main": "index.js",
@@ -41,6 +41,9 @@
   "author": "Poltrax (Michał Piórkowski, Claude.ai)",
   "license": "(MIT AND CC-BY-SA-4.0)",
   "homepage": "https://poltrax-live.github.io/diceware-polski/",
+  "bugs": {
+    "url": "https://github.com/Poltrax-live/diceware-polski/issues"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Poltrax-live/diceware-polski.git",

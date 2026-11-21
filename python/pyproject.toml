@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "diceware-polski"
-version = "1.0.0"
+version = "1.0.1"
 description = "Polish Diceware word lists (7776 words) and a secure passphrase generator"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -20,6 +20,8 @@ classifiers = [
 [project.urls]
 Homepage = "https://poltrax-live.github.io/diceware-polski/"
 Source = "https://github.com/Poltrax-live/diceware-polski"
+Issues = "https://github.com/Poltrax-live/diceware-polski/issues"
+Changelog = "https://github.com/Poltrax-live/diceware-polski/releases"
 
 [project.scripts]
 diceware-polski = "diceware_polski.__main__:main"

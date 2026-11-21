@@ -10,7 +10,7 @@ import secrets
 from functools import lru_cache
 from importlib import resources
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __all__ = ["generate", "lookup", "entropy_bits", "words", "dice_table", "LIST_SIZE"]
 
 LIST_SIZE = 7776
