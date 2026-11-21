@@ -1,0 +1,69 @@
+name: release
+# Publishes the packages via trusted publishing (OIDC), no stored tokens.
+# Runs on version tags (all registries) or manually for chosen registries.
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      rubygems: { type: boolean, default: true, description: "Publish to RubyGems" }
+      pypi: { type: boolean, default: true, description: "Publish to PyPI" }
+      npm: { type: boolean, default: true, description: "Publish to npm" }
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Tag matches VERSION
+        if: startsWith(github.ref, 'refs/tags/')
+        run: test "v$(cat VERSION)" = "${GITHUB_REF_NAME}"
+      - name: Packages are in sync with lists/
+        run: |
+          python3 scripts/sync_packages.py
+          git diff --exit-code
+
+  rubygems:
+    needs: check
+    if: github.event_name == 'push' || inputs.rubygems
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with: { ruby-version: "3.3" }
+      - uses: rubygems/configure-rubygems-credentials@v1
+      - run: gem build diceware-polski.gemspec
+      - run: gem push diceware-polski-$(cat VERSION).gem
+
+  pypi:
+    needs: check
+    if: github.event_name == 'push' || inputs.pypi
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: python3 -m pip install build && python3 -m build python/
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with: { packages-dir: python/dist/ }
+
+  npm:
+    needs: check
+    if: github.event_name == 'push' || inputs.npm
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: "24", registry-url: "https://registry.npmjs.org" }
+      - run: npm install -g npm@latest
+      - run: cd js && npm publish --access public
